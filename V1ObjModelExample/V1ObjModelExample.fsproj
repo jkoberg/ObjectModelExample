@@ -61,7 +61,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="VersionOne.SDK.ObjectModel">
-      <HintPath>..\packages\VersionOne.SDK.ObjectModel.14.0.1.863\lib\net45\VersionOne.SDK.ObjectModel.dll</HintPath>
+      <HintPath>..\packages\VersionOne.SDK.ObjectModel.14.0.1.865\lib\net45\VersionOne.SDK.ObjectModel.dll</HintPath>
       <Private>True</Private>
     </Reference>
   </ItemGroup>

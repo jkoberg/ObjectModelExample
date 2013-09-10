@@ -24,6 +24,7 @@ let checkStorage (storage:OAuth2Client.IStorage) =
           let code = askForAuthCode client
           let creds = client.exchangeAuthCode code
           storage.StoreCredentials(creds)
+    printfn "Secrets and Creds look OK"
     storage
   
 
