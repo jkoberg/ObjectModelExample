@@ -26,7 +26,6 @@ let checkStorage (storage:OAuth2Client.IStorage) =
           storage.StoreCredentials(creds)
     printfn "Secrets and Creds look OK"
     storage
-  
 
 let fetchStories instanceUrl =
   let oauth2Storage = checkStorage Storage.JsonFileStorage.Default
@@ -49,7 +48,9 @@ let printUsage () =
       """
 
 [<EntryPoint>]
-let main = function
+let main argv =
+  ignore <| ProgramAsync.main argv
+  match argv with 
   | [| |]             -> fetchStories "http://localhost/VersionOne.Web"; 0
   | [| instanceUrl |] -> fetchStories instanceUrl; 0
   | _                 -> printUsage(); 1
