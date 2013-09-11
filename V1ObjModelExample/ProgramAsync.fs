@@ -6,7 +6,6 @@ open VersionOne.SDK.ObjectModel
 open OAuth2Client
 open FSharp.Data.Json
 open FSharp.Data.Json.Extensions
-open Nito.AsyncEx.Synchronous
 
 
 type Threading.Tasks.Task<'T> with
@@ -27,7 +26,7 @@ let definitelyFloat = function
   | _ as jval -> jval.AsFloat()
 
 let parse jtxt =
-  match FSharp.Data.Json.JsonValue.Parse(jtxt) with
+  match JsonValue.Parse(jtxt) with
   | JsonValue.Array [| JsonValue.Array results |] -> 
     [ for i in results ->
        ( i?Name.AsString(), 
@@ -80,8 +79,11 @@ let printUsage () =
         example.exe [http://localhost/VersionOne.Web]"
 
       """
+      
+open Nito.AsyncEx.Synchronous
+let sync a = Async.StartAsTask(a).WaitAndUnwrapException();
 
 let main = function
-  | [| |]             -> Async.StartAsTask(fetchStoriesStructuredAsync "http://localhost/VersionOne.Web").WaitAndUnwrapException(); 0
-  | [| instanceUrl |] -> Async.StartAsTask(fetchStoriesStructuredAsync instanceUrl).WaitAndUnwrapException(); 0
+  | [| |]             -> sync <| fetchStoriesStructuredAsync "http://localhost/VersionOne.Web"; 0
+  | [| instanceUrl |] -> sync <| fetchStoriesStructuredAsync instanceUrl; 0
   | _                 -> printUsage(); 1
