@@ -49,7 +49,6 @@ let printUsage () =
 
 [<EntryPoint>]
 let main argv =
-  ignore <| ProgramAsync.main argv
   match argv with 
   | [| |]             -> fetchStories "http://localhost/VersionOne.Web"; 0
   | [| instanceUrl |] -> fetchStories instanceUrl; 0
